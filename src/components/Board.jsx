@@ -48,5 +48,10 @@ export default function Board({ xIsNext, squares, onPlay }) {
     );
   }
 
-  return <>{gameBoard}</>;
+  return (
+    <>
+      <div className="status">{status}</div>
+      {gameBoard}
+    </>
+  );
 }
