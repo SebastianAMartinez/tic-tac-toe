@@ -17,11 +17,15 @@ export default function Board({ xIsNext, squares, onPlay }) {
     onPlay(nextSquares);
   }
 
-  const winner = calculateWinner(squares);
+  const result = calculateWinner(squares);
+  const winner = result?.winner;
+  const winningLine = result?.line || [];
   let status;
 
   if (winner) {
     status = "Winner: " + winner;
+  } else if (!squares.includes(null)) {
+    status = "Draw!";
   } else {
     status = "Next player: " + (xIsNext ? "X" : "O");
   }
@@ -37,6 +41,7 @@ export default function Board({ xIsNext, squares, onPlay }) {
           key={index}
           value={squares[index]}
           onSquareClick={() => handleClick(index)}
+          isWinning={winningLine.includes(index)}
         />
       );
     }
